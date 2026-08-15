@@ -1,0 +1,70 @@
+name: Deploy Angular Leerboek naar GitHub Pages
+# ^ deze naam verschijnt in het "Actions"-tabblad van je GitHub-repo.
+
+on:
+  push:
+    branches:
+      - main
+      # ^ deze workflow start automatisch telkens je naar de "main"-
+      #   branch pusht. Werk je op een andere hoofdbranch (bv. "master"),
+      #   pas dit dan aan — anders start de deploy nooit.
+
+permissions:
+  contents: read
+  # ^ mag de repo-inhoud lezen (nodig om te "checkouten").
+  pages: write
+  # ^ mag naar GitHub Pages publiceren.
+  id-token: write
+  # ^ nodig voor de veilige, tijdelijke authenticatie die GitHub Pages
+  #   gebruikt bij het deployen (OIDC-token, geen wachtwoorden nodig).
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      # ^ toont de live-URL van je site rechtstreeks in de GitHub UI
+      #   nadat de deploy geslaagd is.
+    runs-on: ubuntu-latest
+    # ^ de workflow draait op een tijdelijke, door GitHub beheerde
+    #   Ubuntu-machine — je hoeft zelf niets te installeren of te beheren.
+
+    steps:
+      - uses: actions/checkout@v4
+        # ^ haalt de code van je repository binnen op de runner,
+        #   anders heeft de workflow geen toegang tot je docs/-map.
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+          # ^ installeert een recente Python 3-versie — nodig omdat
+          #   mkdocs-material een Python-pakket is.
+
+      - name: Installeer mkdocs-material
+        run: pip install mkdocs-material
+        # ^ installeert MkDocs + het Material-thema + alle extensies
+        #   die in mkdocs.yml gebruikt worden (admonitions, tabbed,
+        #   superfences voor mermaid, enz. — die zitten mee in dit pakket).
+
+      - name: Build website
+        run: mkdocs build --clean
+        # ^ bouwt de statische site naar de map "site/". "--clean"
+        #   verwijdert eerst oude build-output, zodat er geen
+        #   verouderde bestanden blijven hangen.
+
+      - uses: actions/configure-pages@v5
+        # ^ configureert GitHub Pages voor deze repo (idempotent: kan
+        #   gerust bij elke run opnieuw lopen).
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+          # ^ verpakt de map "site/" (de build-output van de vorige
+          #   stap) als artifact, klaar om gepubliceerd te worden.
+
+      - name: Deploy naar GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        # ^ publiceert het artifact effectief naar GitHub Pages. De
+        #   "id: deployment" hierboven laat toe dat de "environment.url"
+        #   bovenaan de live-link kan tonen.
