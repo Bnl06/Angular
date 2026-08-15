@@ -1,0 +1,135 @@
+# ============================================================================
+# MkDocs Material configuratie — Angular Leerboek
+# Herexamen Web Frameworks — leren vanaf 0
+# ============================================================================
+
+site_name: Angular Leerboek
+site_description: >-
+  Een volledig leerboek om Angular vanaf 0 te leren voor het herexamen
+  Web Frameworks — met uitgelegde code, tips en een eigen oefenproject.
+site_author: Youness
+site_url: https://example.org
+
+copyright: >-
+  Persoonlijk studiemateriaal — herexamen Web Frameworks
+
+theme:
+  name: material
+  language: nl
+  features:
+    # Inhoud
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.tabs.link
+    - content.tooltips
+    # Navigatie
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - navigation.path
+    # Zoeken
+    - search.highlight
+    - search.suggest
+    - search.share
+    # Toc
+    - toc.follow
+
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: red
+      accent: deep orange
+      toggle:
+        icon: material/weather-sunny
+        name: Schakel naar dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: red
+      accent: deep orange
+      toggle:
+        icon: material/weather-night
+        name: Schakel naar light mode
+
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+  icon:
+    logo: material/angular
+    repo: fontawesome/brands/github
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra:
+  generator: false
+  status:
+    new: Nieuw
+    deprecated: Verouderd
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      permalink_title: Anker
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# ============================================================================
+# Navigatie
+# ============================================================================
+nav:
+  - Start: index.md
+
+  - Leerboek:
+      - "0. Inleiding & installatie": Hoofdstukken/00-Inleiding-en-installatie.md
+      - "1. TypeScript crash-cursus": Hoofdstukken/01-TypeScript-crash-cursus.md
+      - "2. Projectstructuur & CLI": Hoofdstukken/02-Projectstructuur-en-CLI.md
+      - "3. Componenten & templates": Hoofdstukken/03-Componenten-en-templates.md
+      - "4. Data binding & control flow": Hoofdstukken/04-Data-binding-en-control-flow.md
+      - "5. Componentcommunicatie": Hoofdstukken/05-Componentcommunicatie.md
+      - "6. Services & Dependency Injection": Hoofdstukken/06-Services-en-DI.md
+      - "7. HTTP & Observables": Hoofdstukken/07-HTTP-en-observables.md
+      - "8. Routing": Hoofdstukken/08-Routing.md
+      - "9. Forms": Hoofdstukken/09-Forms.md
+      - "10. Signals & state": Hoofdstukken/10-Signals-en-state.md
+      - "11. Praktijkcase Takenplanner": Hoofdstukken/11-Praktijkcase-Takenplanner.md
+      - "12. Examentips & valkuilen": Hoofdstukken/12-Examentips-en-valkuilen.md
